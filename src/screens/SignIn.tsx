@@ -2,7 +2,7 @@ import {SignForm} from "./sign-in/SignForm.tsx";
 
 export const SignIn = () => {
     return (
-        <main>
+        <main className="main bg-dark">
             <SignForm/>
         </main>
     )
