@@ -7,6 +7,10 @@ import {ErrorPage} from "./screens/ErrorPage.tsx";
 import {SignIn} from "./screens/SignIn.tsx";
 import {User} from "./screens/User.tsx";
 
+import {Provider} from "react-redux";
+// @ts-ignore
+import {store} from './store';
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -31,7 +35,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router}/>;
+    return (
+        <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
+    );
 }
 
 export default App

@@ -8,5 +8,6 @@ export const ErrorPage = () => {
             <p style={{ fontSize: "20px" }}>Une erreur est survenue...</p>
             <Link to="/">Retour à l'accueil</Link>
         </div>
+
     )
 }
