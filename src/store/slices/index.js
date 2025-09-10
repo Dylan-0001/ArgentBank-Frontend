@@ -11,13 +11,16 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
-            //TODO LOGIN SUCCESS
+            state.token = action.payload.token;
+            state.isConnected = true;
         },
         logout: (state) => {
-            //TODO LOGOUT 
+            state.token = null;
+            state.userProfile = null;
+            state.isConnected = false;
         },
         importUser: (state, action) =>{
-            //TODO IMPORT USER
+            state.userProfile = action.payload;
         },
     },
 })
