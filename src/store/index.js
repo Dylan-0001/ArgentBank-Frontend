@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { storeReducers } from './reducers'
-import { getPosts } from './actions/post.action';
+import { authReducers } from './slices'
 
 export const store = configureStore({
-    reducer: storeReducers,
+    reducer: {
+        auth: authReducers,
+    },
     devTools: true,
 });
-
-store.dispatch(getPosts());
