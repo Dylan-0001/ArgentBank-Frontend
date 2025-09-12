@@ -7,8 +7,8 @@ const initialState = {
     isConnected: false,
 }
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
@@ -30,5 +30,5 @@ export const authSlice = createSlice({
     },
 })
 
-export const {loginSuccess, logout, importUser, updateUser} = authSlice.actions;
-export default authSlice.reducer;
+export const {loginSuccess, logout, importUser, updateUser} = userSlice.actions;
+export default userSlice.reducer;

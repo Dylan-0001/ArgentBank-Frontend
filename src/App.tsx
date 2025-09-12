@@ -11,7 +11,7 @@ import {Provider, useDispatch} from "react-redux";
 // @ts-ignore
 import {store} from './store';
 import {hasValidToken} from "./utils/Utils.ts";
-import {importUser, loginSuccess} from "./store/slices/authSlice.ts";
+import {importUser, loginSuccess} from "./store/slices";
 import {getData} from "./utils/FetchUtils.ts";
 import {useEffect} from "react";
 

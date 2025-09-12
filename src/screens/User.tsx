@@ -9,9 +9,9 @@ export const User = () => {
     const navigate = useNavigate();
 
     // @ts-ignore
-    const isConnected = useSelector(state => state.auth.isConnected);
+    const isConnected = useSelector(state => state.user.isConnected);
     // @ts-ignore
-    const user = useSelector(state => state.auth.userProfile)
+    const user = useSelector(state => state.user.userProfile)
     const [isOnEdit, setOnEdit] = useState(false);
 
     useEffect(() => {

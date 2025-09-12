@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {updateUser} from "../store/slices/authSlice.ts";
+import {updateUser} from "../store/slices";
 import {updateData} from "../utils/FetchUtils.ts";
 
 export const EditForm = ({user, setOnEdit}) => {
