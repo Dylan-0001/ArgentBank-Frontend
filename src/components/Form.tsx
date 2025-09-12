@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {getData, postData} from '../utils/FetchUtils'
 import {useDispatch} from "react-redux";
-import {loginSuccess, importUser } from './../store/slices';
+import {loginSuccess, importUser } from '../store/slices/authSlice.ts';
 
 interface LoginData{
     email: string;

@@ -1,8 +1,9 @@
 import { AccountItem } from "../components/AccountItem"
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {isEmpty} from "../utils/Utils.ts";
+import {EditForm} from "../components/EditForm.tsx";
 
 export const User = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export const User = () => {
     const isConnected = useSelector(state => state.auth.isConnected);
     // @ts-ignore
     const user = useSelector(state => state.auth.userProfile)
+    const [isOnEdit, setOnEdit] = useState(false);
 
     useEffect(() => {
         if (!isConnected) {
@@ -40,11 +42,24 @@ export const User = () => {
         }
     ];
 
+    const handleEdit = () => {
+        setOnEdit(true)
+    }
+
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />{!isEmpty(user) && user.userName}</h1>
-                <button className="edit-button">Edit Name</button>
+                {!isOnEdit ? (
+                    <>
+                        <h1>Welcome back<br />{!isEmpty(user) && user.userName}</h1>
+                        <button className="edit-button" onClick={() => handleEdit()}>Edit Name</button>
+                    </>
+                    ):(
+
+                        <EditForm user={user} setOnEdit={setOnEdit} />
+
+                    )
+                }
             </div>
             <h2 className="sr-only">Accounts</h2>
 

@@ -1,7 +1,7 @@
 import logo from './../assets/img/argentBankLogo.png'
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../store/slices";
+import {logout} from "../store/slices/authSlice.ts";
 import {isEmpty} from "../utils/Utils.ts";
 
 
