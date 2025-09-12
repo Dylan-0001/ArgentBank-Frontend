@@ -1,28 +1,23 @@
 import {useDispatch} from "react-redux";
-import {updateUser} from "../store/slices";
-import {updateData} from "../utils/FetchUtils.ts";
+import {fetchUpdateUserData} from "../store/slices";
 
-export const EditForm = ({user, setOnEdit}) => {
+export const EditForm = ({user, setOnEdit} : {user: Object, setOnEdit: boolean})  => {
 
     const dispatch = useDispatch();
-
 
     const handleUpdateUsername = async (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const newUserName = (formData.get("username") as string);
+        const username = (formData.get("username") as string);
 
-        if(!newUserName || newUserName.trim() === "") {
+        if(!username || username.trim() === "") {
             setOnEdit(false);
             return;
         }
 
         const token = localStorage.getItem("token");
-        const update = await updateData("user/profile", token, newUserName);
 
-        console.log(update);
-        dispatch(updateUser({ userName: newUserName}));
-
+        await dispatch(fetchUpdateUserData({token, newUsername:username }));
         setOnEdit(false);
     }
 

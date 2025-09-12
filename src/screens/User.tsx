@@ -55,9 +55,7 @@ export const User = () => {
                         <button className="edit-button" onClick={() => handleEdit()}>Edit Name</button>
                     </>
                     ):(
-
                         <EditForm user={user} setOnEdit={setOnEdit} />
-
                     )
                 }
             </div>

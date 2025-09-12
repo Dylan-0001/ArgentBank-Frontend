@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import {getData, postData} from '../utils/FetchUtils'
-import {useDispatch} from "react-redux";
-import {loginSuccess, importUser } from '../store/slices';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchPostUserData} from '../store/slices';
+import {fetchUserData} from "../store/slices";
 
 interface LoginData{
     email: string;
@@ -23,14 +23,11 @@ export const Form = () => {
         };
 
         try {
-            const responseData = await postData("user/login", loginData);
-            const token = responseData.body.token;
-            dispatch(loginSuccess({token: token}));
+            const loginRes = await dispatch(fetchPostUserData(loginData)).unwrap();
+            const token = loginRes.body.token;
 
-            const responseUserData = await getData("user/profile", token);
-            const userData = responseUserData.body;
+            dispatch(fetchUserData(token));
 
-            dispatch(importUser(userData));
             navigate("/user");
             console.log("Login successfull ");
         }

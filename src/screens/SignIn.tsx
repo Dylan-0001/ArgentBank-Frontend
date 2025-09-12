@@ -8,8 +8,6 @@ export const SignIn = () => {
 
     // @ts-ignore
     const isConnected = useSelector(state => state.user.isConnected);
-    // @ts-ignore
-    const user = useSelector(state => state.user.userProfile)
 
     useEffect(() => {
         if (isConnected) {

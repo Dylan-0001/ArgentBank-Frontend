@@ -1,29 +1,19 @@
 import {useDispatch} from "react-redux";
 import {hasValidToken} from "./Utils.ts";
-import {importUser, loginSuccess} from "../store/slices";
-import {getData} from "./FetchUtils.ts";
+import {fetchUserData, loginSuccess} from "../store/slices";
 import {useEffect} from "react";
 
 export function AppLogin(){
     const dispatch = useDispatch();
+
     const checkLogin =  async () => {
         if(hasValidToken())
         {
-            try {
-                const token = localStorage.getItem("token");
-                dispatch(loginSuccess({token: token}));
+            const token = localStorage.getItem("token");
+            await dispatch(loginSuccess({token}));
+            await dispatch(fetchUserData(token)).unwrap();
 
-                // @ts-ignore
-                const responseUserData = await getData("user/profile", token);
-                // @ts-ignore
-                const userData = responseUserData.body;
-                dispatch(importUser(userData));
-
-                console.log("Login successfull ");
-            }
-            catch (error) {
-                console.log(error);
-            }
+            console.log("Login successfull ");
         }
     }
 
