@@ -33,7 +33,7 @@ export const Header = () => {
                     <div>
                         <Link to="/user" className="main-nav-item">
                             <i className="fa fa-user-circle"></i>
-                            {!isEmpty(user) && user.firstName}
+                            {!isEmpty(user) && user.userName}
                         </Link>
 
                         <Link to="/" className="main-nav-item" onClick={handleDisconnected}>
