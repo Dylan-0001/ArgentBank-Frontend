@@ -2,6 +2,7 @@ import { AccountItem } from "../components/AccountItem"
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import {isEmpty} from "../utils/Utils.ts";
 
 export const User = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ export const User = () => {
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />{user.lastName + " " + user.firstName}</h1>
+                <h1>Welcome back<br />{!isEmpty(user) && user.lastName + " " + user.firstName}</h1>
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>

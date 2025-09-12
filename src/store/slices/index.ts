@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    token: null, //TODO DEMANDER SI UTILE DE STOCKER DANS STORE
     userProfile: null,
     isConnected: false,
 }
@@ -11,7 +10,6 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
-            state.token = action.payload.token;
             state.isConnected = true;
             localStorage.setItem('token', action.payload.token);
         },
