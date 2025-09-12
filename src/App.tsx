@@ -7,9 +7,13 @@ import {ErrorPage} from "./screens/ErrorPage.tsx";
 import {SignIn} from "./screens/SignIn.tsx";
 import {User} from "./screens/User.tsx";
 
-import {Provider} from "react-redux";
+import {Provider, useDispatch} from "react-redux";
 // @ts-ignore
 import {store} from './store';
+import {hasValidToken} from "./utils/Utils.ts";
+import {importUser, loginSuccess} from "./store/slices";
+import {getData} from "./utils/FetchUtils.ts";
+import {useEffect} from "react";
 
 
 const router = createBrowserRouter([
@@ -35,9 +39,38 @@ const router = createBrowserRouter([
     }
 ]);
 
+function AppLogin(){
+    const dispatch = useDispatch();
+    const checkLogin =  async () => {
+        if(hasValidToken())
+        {
+            try {
+                const token = localStorage.getItem("token");
+                dispatch(loginSuccess({token: token}));
+
+                // @ts-ignore
+                const responseUserData = await getData("user/profile", token);
+                // @ts-ignore
+                const userData = responseUserData.body;
+                dispatch(importUser(userData));
+
+                console.log("Login successfull ");
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+    useEffect(() => {
+        checkLogin();
+    }, []);
+}
+
 function App() {
     return (
         <Provider store={store}>
+            <AppLogin/>
             <RouterProvider router={router}/>
         </Provider>
     );

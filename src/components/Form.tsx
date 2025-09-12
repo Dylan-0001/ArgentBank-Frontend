@@ -1,14 +1,16 @@
 import {useNavigate} from "react-router-dom";
+import {getData, postData} from '../utils/FetchUtils'
+import {useDispatch} from "react-redux";
+import {loginSuccess, importUser } from './../store/slices';
 
 interface LoginData{
     email: string;
     password: string;
 }
 
-const apiLink = "http://localhost:3001/api/v1/";
-
 export const Form = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) =>
     {
@@ -21,24 +23,16 @@ export const Form = () => {
         };
 
         try {
-            const response = await fetch(apiLink + "user/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(loginData),
-            });
+            const responseData = await postData("user/login", loginData);
+            const token = responseData.body.token;
+            dispatch(loginSuccess({token: token}));
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Impossible de se connecté");
-            }
+            const responseUserData = await getData("user/profile", token);
+            const userData = responseUserData.body;
 
-
-            const responseData = await postData();
-            localStorage.setItem("token", responseData.body.token)
-            console.log("Login successfull ");
+            dispatch(importUser(userData));
             navigate("/user");
+            console.log("Login successfull ");
         }
         catch (error) {
             console.log(error);

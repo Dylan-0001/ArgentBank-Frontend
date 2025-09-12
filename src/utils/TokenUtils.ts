@@ -1,4 +1,4 @@
-function parseJwt(token) {
+function parseJwt(token: string) {
   try {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -14,7 +14,7 @@ function parseJwt(token) {
   }
 }
 
-export function isTokenValid(token) {
+export function isTokenValid(token: string) {
   if (!token) return false;
 
   const decoded = parseJwt(token);

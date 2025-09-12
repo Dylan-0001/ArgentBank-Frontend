@@ -1,14 +1,20 @@
 import logo from './../assets/img/argentBankLogo.png'
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../store/slices";
+import {isEmpty} from "../utils/Utils.ts";
 
 
 export const Header = () => {
+    const dispatch = useDispatch();
 
-    const [isConnected, setConnected] = useState(true);
+    // @ts-ignore
+    const isConnected = useSelector(state => state.auth.isConnected);
+    // @ts-ignore
+    const user = useSelector(state => state.auth.userProfile);
 
     const handleDisconnected = () => {
-        setConnected(false);
+        dispatch(logout());
     }
 
     return (
@@ -27,7 +33,7 @@ export const Header = () => {
                     <div>
                         <Link to="/user" className="main-nav-item">
                             <i className="fa fa-user-circle"></i>
-                            Tony
+                            {!isEmpty(user) && user.firstName}
                         </Link>
 
                         <Link to="/" className="main-nav-item" onClick={handleDisconnected}>

@@ -1,6 +1,25 @@
 import { AccountItem } from "../components/AccountItem"
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export const User = () => {
+    const navigate = useNavigate();
+
+    // @ts-ignore
+    const isConnected = useSelector(state => state.auth.isConnected);
+    // @ts-ignore
+    const user = useSelector(state => state.auth.userProfile)
+
+    useEffect(() => {
+        if (!isConnected) {
+            navigate("/sign-in")
+        }
+    }, [isConnected, navigate])
+
+    if (!isConnected) {
+        return null
+    }
 
     const accounts = [
         {
@@ -20,10 +39,11 @@ export const User = () => {
         }
     ];
 
+
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
+                <h1>Welcome back<br />{user.lastName + " " + user.firstName}</h1>
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>
