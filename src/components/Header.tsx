@@ -1,4 +1,4 @@
-import logo from './../assets/img/argentBankLogo.png'
+import logo from './../assets/img/argentBankLogo.webp'
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../store/slices";
