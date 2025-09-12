@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    token: null,
+    token: null, //TODO DEMANDER SI UTILE DE STOCKER DANS STORE
     userProfile: null,
     isConnected: false,
 }
@@ -26,4 +26,4 @@ const authSlice = createSlice({
 })
 
 export const {loginSuccess, logout, importUser} = authSlice.actions;
-export default authSlice.reducer;
+export { default as authReducer } from "./authSlice";

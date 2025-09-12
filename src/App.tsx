@@ -11,6 +11,7 @@ import {Provider} from "react-redux";
 // @ts-ignore
 import {store} from './store';
 
+
 const router = createBrowserRouter([
     {
         path: '/',

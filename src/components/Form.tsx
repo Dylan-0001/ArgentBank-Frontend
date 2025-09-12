@@ -34,7 +34,8 @@ export const Form = () => {
                 throw new Error(errorData.message || "Impossible de se connecté");
             }
 
-            const responseData = await response.json();
+
+            const responseData = await postData();
             localStorage.setItem("token", responseData.body.token)
             console.log("Login successfull ");
             navigate("/user");
